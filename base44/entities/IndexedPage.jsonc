@@ -1,0 +1,59 @@
+{
+  "name": "IndexedPage",
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "page_type": {
+      "type": "string",
+      "enum": [
+        "page",
+        "article",
+        "product",
+        "media",
+        "app"
+      ],
+      "default": "page"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "indexed",
+        "pending",
+        "excluded"
+      ],
+      "default": "pending"
+    },
+    "priority": {
+      "type": "number",
+      "default": 0.5
+    },
+    "last_crawled": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "url",
+    "title"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": {},
+    "delete": {}
+  }
+}
