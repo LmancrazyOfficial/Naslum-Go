@@ -1,0 +1,68 @@
+{
+  "name": "NaslumPoll",
+  "type": "object",
+  "properties": {
+    "question": {
+      "type": "string"
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "creator_id": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "total_votes": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "required": [
+    "question"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "data.creator_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "data.creator_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.creator_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
