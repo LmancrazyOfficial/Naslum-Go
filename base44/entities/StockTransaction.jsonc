@@ -1,0 +1,106 @@
+{
+  "name": "StockTransaction",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "ticker": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "buy",
+        "sell",
+        "dividend",
+        "deposit",
+        "withdrawal"
+      ]
+    },
+    "shares": {
+      "type": "number",
+      "default": 0
+    },
+    "price": {
+      "type": "number",
+      "default": 0
+    },
+    "total": {
+      "type": "number",
+      "default": 0
+    },
+    "order_type": {
+      "type": "string",
+      "enum": [
+        "market",
+        "limit"
+      ],
+      "default": "market"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "filled",
+        "pending",
+        "cancelled"
+      ],
+      "default": "filled"
+    }
+  },
+  "required": [
+    "user_id",
+    "ticker",
+    "type"
+  ],
+  "rls": {
+    "create": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "update": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
