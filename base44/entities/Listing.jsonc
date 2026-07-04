@@ -1,0 +1,104 @@
+{
+  "name": "Listing",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "price": {
+      "type": "number"
+    },
+    "currency": {
+      "type": "string",
+      "default": "USD"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Electronics",
+        "Clothing",
+        "Books",
+        "Home & Garden",
+        "Sports",
+        "Toys",
+        "Vehicles",
+        "Art",
+        "Music",
+        "Other"
+      ]
+    },
+    "condition": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Like New",
+        "Good",
+        "Fair",
+        "Parts Only"
+      ]
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "seller_id": {
+      "type": "string"
+    },
+    "seller_name": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "is_available": {
+      "type": "boolean",
+      "default": true
+    },
+    "views": {
+      "type": "number",
+      "default": 0
+    },
+    "accepts_card": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "title",
+    "price",
+    "category"
+  ],
+  "rls": {
+    "create": {},
+    "read": {},
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}
